@@ -5,10 +5,6 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var request = require("request");
 
-// *** Scraping Tools *** //
-var axios = require("axios");
-var cheerio = require("cheerio");
-
 // Require all models
 var db = require("./models");
 
@@ -27,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/mongo-scraper");
+mongoose.connect("mongodb://localhost/mongo-scraper");
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -36,7 +32,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes
+var routes = require("./controllers/controller.js");
 
+app.use(routes);
 
 // Start the Server
 app.listen(PORT, function() {

@@ -1,0 +1,19 @@
+.btn {
+    margin-left: 10px;
+}
+
+.panel-heading {
+    background-color: rgb(52,58,64);
+    text-align: center;
+}
+
+.panel-title {
+    color: #fff;
+    font-weight: bold;
+}
+
+.well {
+    background-color: rgb(233,236,239);
+    border: 3px solid rgb(52,58,64);
+    border-radius: 10px;
+}
