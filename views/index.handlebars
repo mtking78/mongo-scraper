@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body" id="well-section">
                     {{#each articles}}
-                    <article class="well" id="article-body">
+                    <article class="well" id="article-body" data-id={{this._id}}>
                         <h3 class="articleTitle">{{this.title}}</h3>
                         <h5 class="articleLink">{{this.link}}</h5>
                         <h5>{{this.id}}</h5>

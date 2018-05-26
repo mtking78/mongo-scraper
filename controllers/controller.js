@@ -12,18 +12,18 @@ var db = require("../models");
 // *** Route for Scraping *** //
 router.get("/scrape", function(req, res) {
     // Get the entire body of the html with a request.
-    axios.get("http://www.echojs.com/")
+    axios.get("https://www.theonion.com/c/news-in-brief")
     .then(function(response) {
         // Load the response into cheerio and save it as a short-hand selector "$"
         var $ = cheerio.load(response.data);
 
-        // Get every h2 within an article tag...
-        $("article h2").each(function(i, element) {
+        // Get every h1 within an article tag...
+        $("article h1").each(function(i, element) {
             // Save an empty result object
             var result = {};
-
+            console.log(result);
             // Get the text and href of every link, save them as properties of the result object.
-            result.title = $(this).children("a").text();
+            result.title = $(this).text();
             result.link = $(this).children("a").attr("href");
 
             // Create a new Article with the `result` object built from scraping.
@@ -47,7 +47,8 @@ router.get("/scrape", function(req, res) {
 
 // Route to get all Articles from the db.
 router.get("/", function(req, res) {
-    db.Article.find({})
+    // Limit set to only show first 20 articles.
+    db.Article.find({}).limit(20)
     .then(function(scrapedData) {
         // Save all scraped data into a handlebars object.
         var hbsObject = {articles:scrapedData};
