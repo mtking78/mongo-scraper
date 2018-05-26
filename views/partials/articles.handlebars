@@ -1,0 +1,17 @@
+{{#each articles}}{{#unless saved}}
+<div class="card" data-id={{this._id}}>
+    <div class="card-header bg-primary">
+        <div class="header-left">
+            <h3 class="articleTitle">{{this.title}}</h3>
+        </div>
+        <div class="header-right">
+            <button type="button" class="btn btn-success" id ="save-btn" data-id="{{this.id}}">Save</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="articleLink">{{this.link}}</h5>
+        <h5>{{this.id}}</h5>
+    </div>
+</div>
+<br>
+{{/unless}}{{/each}}

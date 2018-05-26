@@ -61,4 +61,21 @@ router.get("/", function(req, res) {
         res.json(error);
     });
 });
+
+// Route to save an Article.
+router.put("/saved/:id", function(req, res) {
+    // Update the article's boolean "saved" status to 'true.'
+    db.Article.update(
+        {_id: req.params.id},
+        {saved: req.body.saved}
+    )
+    .then(function(result) {
+        res.json(result);
+    })
+    .catch(function(error) {
+        // If an error occurs, send the error to the client.
+        res.json(error);
+    });
+});
+
 module.exports = router;
