@@ -25,7 +25,8 @@
     display: inline;
 }
 
-#save-btn {
+#save-btn,
+#return-btn {
     border: 2px solid #fff;
 }
 

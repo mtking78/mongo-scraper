@@ -22,4 +22,20 @@ router.get("/saved-articles", function(req, res) {
     });
 });
 
+// Route to return (unsave) an Article.
+router.put("/returned/:id", function(req, res) {
+    // Update the article's boolean "saved" status to 'false.'
+    db.Article.update(
+        {_id: req.params.id},
+        {saved: req.body.saved}
+    )
+    .then(function(result) {
+        res.json(result);
+    })
+    .catch(function(error) {
+        // If an error occurs, send the error to the client.
+        res.json(error);
+    });
+});
+
 module.exports = router;

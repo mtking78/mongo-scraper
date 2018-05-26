@@ -55,4 +55,26 @@ $(function() {
         });
     });
 
+    // Return (unsave) an Article.
+    $("#return-btn").on("click", function() {
+        // Keep the page from reloading.
+        event.preventDefault();
+        // Read data attribute from "return" button.
+        var id = $(this).data("id");
+        // Change boolean value to 'false' for "saved."
+        var savedState = {
+            saved: false
+        };
+
+        // Send the PUT request.
+        $.ajax("/returned/" + id, {
+            type: "PUT",
+            data: savedState
+        }).then(function() {
+            // ??? Modal success message.
+            console.log("Article returned");
+            location.reload();
+        });
+    });
+
 })
