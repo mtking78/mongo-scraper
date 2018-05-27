@@ -67,7 +67,7 @@ router.put("/saved/:id", function(req, res) {
     // Update the article's boolean "saved" status to 'true.'
     db.Article.update(
         {_id: req.params.id},
-        {saved: req.body.saved}
+        {saved: true}
     )
     .then(function(result) {
         res.json(result);

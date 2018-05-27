@@ -27,7 +27,7 @@ router.put("/returned/:id", function(req, res) {
     // Update the article's boolean "saved" status to 'false.'
     db.Article.update(
         {_id: req.params.id},
-        {saved: req.body.saved}
+        {saved: false}
     )
     .then(function(result) {
         res.json(result);

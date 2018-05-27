@@ -34,20 +34,16 @@ $(function() {
     });
 
     // Save an Article.
-    $("#save-btn").on("click", function() {
+    $(".save-btn").on("click", function() {
         // Keep the page from reloading.
         event.preventDefault();
         // Read data attribute from "save" button.
         var id = $(this).data("id");
-        // Change boolean value to 'true' for "saved."
-        var savedState = {
-            saved: true
-        };
 
         // Send the PUT request.
-        $.ajax("/saved/" + id, {
-            type: "PUT",
-            data: savedState
+        $.ajax({
+            url: "/saved/" + id,
+            type: "PUT"
         }).then(function() {
             // ??? Modal success message.
             console.log("Article has been saved");
@@ -56,20 +52,16 @@ $(function() {
     });
 
     // Return (unsave) an Article.
-    $("#return-btn").on("click", function() {
+    $(".return-btn").on("click", function() {
         // Keep the page from reloading.
         event.preventDefault();
         // Read data attribute from "return" button.
         var id = $(this).data("id");
-        // Change boolean value to 'false' for "saved."
-        var savedState = {
-            saved: false
-        };
 
         // Send the PUT request.
-        $.ajax("/returned/" + id, {
-            type: "PUT",
-            data: savedState
+        $.ajax({
+            url: "/returned/" + id,
+            type: "PUT"
         }).then(function() {
             // ??? Modal success message.
             console.log("Article returned");
