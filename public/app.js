@@ -23,7 +23,7 @@ $(function() {
         }).then(function() {
             // console.log("Scrape complete");
             // Reload the page to get the scraped data.
-            $("#scrapeCloseBtn").on("click", function() {
+            $(".scrapeCloseBtn").on("click", function() {
                 location.reload();
             });
         });
@@ -49,14 +49,38 @@ $(function() {
         $.ajax({
             url: "/saved/" + id,
             type: "PUT",
-            function () {
+            success: function () {
+                // Show the 'save' success message in the modal,
                 $('#saveArticleModal').modal('show');
             }
-        }).then(function() {
+        })
+        // then update the page when the modal is closed.
+        .then(function() {
             // console.log("Article has been saved");
-            $("#saveArticleCloseBtn").on("click", function() {
+            $(".saveArticleCloseBtn").on("click", function() {
                 location.reload();
             });
+        });
+    });
+
+    $(".notes-btn").on("click", function() {
+        // Keep the page from reloading.
+        event.preventDefault();
+        // Save the id from the button
+        var articleId = $(this).attr("data-id");
+
+        // Make the ajax call for the article
+        $.ajax({
+            method: "GET",
+            url: "/saved-articles/" + articleId,
+            success: function () {
+                // Open the notes modal
+                $('#notesModal').modal('show');
+            }
+        })
+        // Add the note information
+        .then(function(data) {
+            console.log(data);
         });
     });
 
@@ -71,12 +95,15 @@ $(function() {
         $.ajax({
             url: "/returned/" + id,
             type: "PUT",
-            function () {
+            success: function () {
+                // Show the 'return' success message in the modal,
                 $('#returnArticleModal').modal('show');
             }
-        }).then(function() {
+        })
+        // then update the page when the modal is closed.
+        .then(function() {
             // console.log("Article removed");
-            $("#saveArticleCloseBtn").on("click", function() {
+            $(".returnArticleCloseBtn").on("click", function() {
                 location.reload();
             });
         });

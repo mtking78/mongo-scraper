@@ -22,6 +22,48 @@ router.get("/saved-articles", function(req, res) {
     });
 });
 
+// Route to get a specific saved Article and populate it with its note.
+router.get("/saved-articles/:id", function(req,res) {
+    // Find the article by req.params.id,
+    db.Article.findOne(
+        {_id: req.params.id}
+    )
+    // run the populate method with note,
+    .populate("note")
+    // respond with the article with the note included.
+    .then(function(dbArticle) {
+        // If all Articles are successfully found, send them back to the client.
+        res.json(dbArticle);
+    })
+    .catch(function(error) {
+        // If an error occurs, send the error to the client.
+        res.json(error);
+    });
+});
+
+// Route for saving/updating an Article's associated Note.
+router.post("/saved-articles/:id", function(req, res) {
+    // Save the new note that gets posted to the Notes collection,
+    // then find an article from the req.params.id,
+    // and update it's "note" property with the _id of the new note.
+    db.Note.create(req.body)
+    .then(function(dbNote) {
+        return db.Article.findOneAndUpdate(
+            {_id: req.params.id},
+            {note: dbNote._id},
+            {new: true }
+        );
+    })
+    .then(function(dbArticle) {
+        // If all Notes are successfully found, send them back to the client.
+        res.json(dbArticle);
+    })
+    .catch(function(error) {
+        // If an error occurs, send the error to the client.
+        res.json(error);
+    });
+});
+
 // Route to return (unsave) an Article.
 router.put("/returned/:id", function(req, res) {
     // Update the article's boolean "saved" status to 'false.'
