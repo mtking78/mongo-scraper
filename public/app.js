@@ -17,10 +17,15 @@ $(function() {
         // Run the scaping route in controller.js with a GET request.
         $.ajax("/scrape", {
             type: "GET",
+            function () {
+                $('#scrapeModal').modal('show');
+            }
         }).then(function() {
-            console.log("Scrape complete");
+            // console.log("Scrape complete");
             // Reload the page to get the scraped data.
-            location.reload();
+            $("#scrapeCloseBtn").on("click", function() {
+                location.reload();
+            });
         });
     });
 
@@ -43,11 +48,15 @@ $(function() {
         // Send the PUT request.
         $.ajax({
             url: "/saved/" + id,
-            type: "PUT"
+            type: "PUT",
+            function () {
+                $('#saveArticleModal').modal('show');
+            }
         }).then(function() {
-            // ??? Modal success message.
-            console.log("Article has been saved");
-            location.reload();
+            // console.log("Article has been saved");
+            $("#saveArticleCloseBtn").on("click", function() {
+                location.reload();
+            });
         });
     });
 
@@ -61,11 +70,15 @@ $(function() {
         // Send the PUT request.
         $.ajax({
             url: "/returned/" + id,
-            type: "PUT"
+            type: "PUT",
+            function () {
+                $('#returnArticleModal').modal('show');
+            }
         }).then(function() {
-            // ??? Modal success message.
-            console.log("Article returned");
-            location.reload();
+            // console.log("Article removed");
+            $("#saveArticleCloseBtn").on("click", function() {
+                location.reload();
+            });
         });
     });
 
