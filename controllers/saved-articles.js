@@ -22,14 +22,14 @@ router.get("/saved-articles", function(req, res) {
     });
 });
 
-// Route to get a specific saved Article and populate it with its note.
-router.get("/saved-articles/:id", function(req,res) {
+// Route to get a specific saved Article and populate it with its notes.
+router.get("/getnotes/:id", function(req,res) {
     // Find the article by req.params.id,
     db.Article.findOne(
         {_id: req.params.id}
     )
     // run the populate method with note,
-    .populate("note")
+    .populate("notes")
     // respond with the article with the note included.
     .then(function(dbArticle) {
         // If all Articles are successfully found, send them back to the client.
@@ -42,7 +42,7 @@ router.get("/saved-articles/:id", function(req,res) {
 });
 
 // Route for saving/updating an Article's associated Note.
-router.post("/saved-articles/:id", function(req, res) {
+router.post("/postnotes/:id", function(req, res) {
     // Save the new note that gets posted to the Notes collection,
     // then find an article from the req.params.id,
     // and update it's "note" property with the _id of the new note.
@@ -50,10 +50,15 @@ router.post("/saved-articles/:id", function(req, res) {
     .then(function(dbNote) {
         return db.Article.findOneAndUpdate(
             {_id: req.params.id},
-            {note: dbNote._id},
+            {$push:
+                {notes: dbNote._id}
+            },
+            // {note: dbNote._id},
             {new: true }
         );
-    })
+    })    // run the populate method with note,
+    // .populate("notes")
+    // respond with the article with the note included.
     .then(function(dbArticle) {
         // If all Notes are successfully found, send them back to the client.
         res.json(dbArticle);

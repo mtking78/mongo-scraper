@@ -25,17 +25,25 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title"></h4>
                 <button type="button" class="close notesCloseBtn" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-            Article Returned
+                <input id="titleinput" name="title" placeholder="Note Title">
+                <br>
+                <textarea id="bodyinput" name="body" placeholder="Note Text"></textarea>
+                <div class="noteArea">
+                    {{#each notes}}
+                        <p>{{title}} - {{body}}</p>
+                    {{/each}}
+                </div>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-success saveNoteBtn">Save Note</button>
                 <button type="button" class="btn notesCloseBtn" data-dismiss="modal">Close</button>
             </div>
 
