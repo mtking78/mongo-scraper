@@ -69,6 +69,27 @@ router.post("/postnotes/:id", function(req, res) {
     });
 });
 
+// Route to delete a Note.
+router.delete("/deletenote/:id", function(req,res) {
+    db.Note.remove(
+        {_id: req.params.id}
+    )
+    // Todo - remove note from article as well
+    // .then(function (dbArticle) {
+    //     db.Article.findOneAndDelete(
+    //         {_id: req.params.id},
+    //         {notes: dbNote._id},
+    //         // {new: true }
+    //     );
+    // })
+    .then(function(dbNote) {
+        res.json(dbNote);
+    })
+    .catch(function(error) {
+        res.json(error);
+    });
+});
+
 // Route to return (unsave) an Article.
 router.put("/returned/:id", function(req, res) {
     // Update the article's boolean "saved" status to 'false.'

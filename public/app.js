@@ -67,6 +67,8 @@ $(function() {
     $(".notes-btn").on("click", function() {
         // Keep the page from reloading.
         event.preventDefault();
+        // Empty the notes from the note section
+        $(".noteArea").empty();
         // Save the id from the button
         var articleId = $(this).attr("data-id");
         // Make the ajax call for the article
@@ -80,7 +82,7 @@ $(function() {
         })
         // Add the note information
         .then(function(data) {
-            console.log(data);
+            // console.log(data);
             var id = data._id;
             // Set the title in the header.
             $(".modal-title").html(data.title);
@@ -89,15 +91,31 @@ $(function() {
 
             // If there's already a note for the article...
             if (data.notes) {
-                console.log(data);
-                // // Place the title of the note in the title input
-                // $("#titleinput").val(data.note.title);
-                // // Place the body of the note in the body textarea
-                // $("#bodyinput").val(data.note.body);
-                
+                console.log(data.notes);
+                for (i=0; i<data.notes.length; i++) {
+                    $(".noteArea").append("<h2>" + data.notes[i].title + "</h2>");
+                    $(".noteArea").append("<p>" + data.notes[i].body + "</p>");
+                    $(".noteArea").append("<button type='button' data-id='" + data.notes[i]._id + "' class='btn deleteNote btn-danger'>Delete</button>");
+                }
                 $(".noteArea").val(data.notes.title);
             }
         });
+    });
+
+    // Delete a specific note.
+    $(document).on("click", ".deleteNote", function() {
+        var noteId = $(this).attr("data-id");
+        console.log("noteId: " + noteId);
+
+        // Run a POST request to delete the note.
+        $.ajax({
+            method: "DELETE",
+            url: "/deletenote/" + noteId
+        })
+        .then(function(data) {
+            // Log the response
+            console.log(data);
+        })
     });
 
     $(".saveNoteBtn").on("click", function() {
@@ -115,8 +133,8 @@ $(function() {
         .then(function(data) {
             // Log the response
             console.log(data);
-            // Empty the notes section
-            // $("#notes").empty();
+            // Todo- use better method than reload
+            location.reload();
         });
         // Also, remove the values entered in the input and textarea for note entry
         $("#titleinput").val("");
