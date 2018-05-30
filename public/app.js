@@ -63,7 +63,7 @@ $(function() {
         });
     });
 
-    // Get notes for an article.
+    // Get all notes for an article.
     $(".notes-btn").on("click", function() {
         // Keep the page from reloading.
         event.preventDefault();
@@ -93,16 +93,47 @@ $(function() {
             if (data.notes) {
                 console.log(data.notes);
                 for (i=0; i<data.notes.length; i++) {
-                    $(".noteArea").append("<h2>" + data.notes[i].title + "</h2>");
-                    $(".noteArea").append("<p>" + data.notes[i].body + "</p>");
-                    $(".noteArea").append("<button type='button' data-id='" + data.notes[i]._id + "' class='btn deleteNote btn-danger'>Delete</button>");
+                    $(".noteArea").append(
+                        "<div class='card-body notecard' id='notecard'>" + 
+                            "<h4 class='notecardTitle' data-id='" + data.notes[i]._id + "'>" + 
+                                data.notes[i].title + 
+                            "</h4>" + 
+                            "<button type='button' class='btn btn-danger deleteNote' data-id='" + data.notes[i]._id + "'>Delete</button>" + 
+                        "</div>"
+                    );
+                    $(".noteArea").append(
+                        "<hr>"
+                    );
                 }
-                $(".noteArea").val(data.notes.title);
             }
         });
     });
 
-    // Delete a specific note.
+    // Retrieve a specific Note.
+    $(document).on("click", ".notecardTitle", function() {
+        var noteId = $(this).attr("data-id");
+        console.log("noteId by title: " + noteId);
+
+        // Run a GET request to update the note.
+        $.ajax({
+            method: "GET",
+            url: "/getsinglenote/" + noteId
+        })
+        .then(function(data) {
+            // Log the response
+            console.log(data);
+
+            // If the Note is found,
+            if (data) {
+                // place the title of the note in the title input,
+                $("#titleinput").val(data.title);
+                // place the body of the note in the body textarea.
+                $("#bodyinput").val(data.body);
+            }
+        })
+    });
+
+    // Delete a specific Note.
     $(document).on("click", ".deleteNote", function() {
         var noteId = $(this).attr("data-id");
         console.log("noteId: " + noteId);
@@ -115,9 +146,12 @@ $(function() {
         .then(function(data) {
             // Log the response
             console.log(data);
+            // Todo- use better method than reload
+            location.reload();
         })
     });
 
+    // Save a Note.
     $(".saveNoteBtn").on("click", function() {
         var articleId = $(this).attr("data-id");
         $.ajax({

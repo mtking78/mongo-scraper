@@ -56,8 +56,7 @@ router.post("/postnotes/:id", function(req, res) {
             // {note: dbNote._id},
             {new: true }
         );
-    })    // run the populate method with note,
-    // .populate("notes")
+    })
     // respond with the article with the note included.
     .then(function(dbArticle) {
         // If all Notes are successfully found, send them back to the client.
@@ -65,6 +64,19 @@ router.post("/postnotes/:id", function(req, res) {
     })
     .catch(function(error) {
         // If an error occurs, send the error to the client.
+        res.json(error);
+    });
+});
+
+// Route for updating a Note.
+router.get("/getsinglenote/:id", function(req,res) {
+    db.Note.findOne(
+        {_id: req.params.id}
+    )
+    .then(function(result) {
+        res.json(result);
+    })
+    .catch(function(error) {
         res.json(error);
     });
 });

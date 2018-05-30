@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 #scrape-btn,
 #clear-btn {
     margin-left: 10px;
@@ -30,8 +34,16 @@
     border: 2px solid #fff;
 }
 
-/* .well {
-    background-color: rgb(233,236,239);
-    border: 3px solid rgb(52,58,64);
-    border-radius: 10px;
-} */
+#notecard {
+    padding: 0px;
+}
+
+.notecardTitle {
+    width: 70%;
+    display: inline-block;
+}
+
+.deleteNote {
+    width: 30%;
+    display: inline-block;
+}
