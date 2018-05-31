@@ -37,6 +37,27 @@
     </div>
 </div>
 
+<!-- Warning Modal -->
+<div class="modal fade" id="warningModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body" id="modal-message">
+                <h2 class="warning">WARNING!</h2>
+                <p>Selecting "CLEAR!" will delete all your scraped & saved articles, and your notes!</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="destroy-btn" data-dismiss="modal">CLEAR!</button>
+                <button type="button" class="btn scrapeCloseBtn" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- Save Article Modal -->
 <div class="modal fade" id="saveArticleModal">
     <div class="modal-dialog modal-dialog-centered">

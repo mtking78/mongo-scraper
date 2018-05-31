@@ -80,4 +80,24 @@ router.put("/saved/:id", function(req, res) {
     });
 });
 
+// Route to drop the Articles collection.
+router.delete("/drop-articles", function(req, res, next) {
+    db.Article.remove({}, function(err) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("articles dropped!");
+        }
+    })
+    .then(function (dropnotes) {
+        db.Note.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("notes dropped!");
+            }
+        })
+    })
+});
+
 module.exports = router;

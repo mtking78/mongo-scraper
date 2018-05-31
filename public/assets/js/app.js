@@ -29,13 +29,29 @@ $(function() {
         });
     });
 
-    // Clear the scraped results.
-    $("#clear-btn").on("click", function() {
+    $(document).on("click", "#clear-btn", function() {
         // Keep the page from reloading.
         event.preventDefault();
+        // Summon the warning modal to prevent accidental database drop.
+        $('#warningModal').modal('show');
+    });
 
-        // Empty the articles section.
-        clear();
+    // Clear the scraped results.
+    $("#destroy-btn").on("click", function() {
+        // Keep the page from reloading.
+        event.preventDefault();
+        // Need to place reload here or it won't fire.
+        location.reload();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/drop-articles',
+            success: function(response) {
+                if (response == 'error') {
+                    console.log('Err!');
+                }
+            }
+        });
     });
 
     // Save an Article.
