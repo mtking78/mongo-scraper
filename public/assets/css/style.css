@@ -32,6 +32,10 @@
     background-color: rgb(0,107,58);
 }
 
+.clearfix {
+    overflow: auto;
+}
+
 .pagetitle {
     position: absolute;
     top: 60%;
@@ -41,6 +45,17 @@
 .row {
     position: relative;
     top: 175px;
+}
+
+#modal-message {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.modal-header,
+.modal-footer {
+    background-color: rgb(0,107,58);
+    color: #fff;
 }
 
 .panel-heading {
