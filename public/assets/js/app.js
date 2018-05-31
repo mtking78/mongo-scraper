@@ -168,7 +168,7 @@ $(function() {
             // Log the response
             console.log(data);
             // Todo- use better method than reload
-            location.reload();
+            // location.reload();
         });
         // Also, remove the values entered in the input and textarea for note entry
         $("#titleinput").val("");

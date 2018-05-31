@@ -12,7 +12,7 @@ router.get("/saved-articles", function(req, res) {
     .then(function(savedData) {
         // Save all saved article data into a handlebars object.
         var hbsObject = {articles:savedData};
-        console.log(hbsObject);
+        // console.log(hbsObject);
         // Send all found saved articles as an object to be used in the handlebars receieving section of the index.
         res.render("saved", hbsObject);
     })
@@ -46,6 +46,8 @@ router.post("/postnotes/:id", function(req, res) {
     // Save the new note that gets posted to the Notes collection,
     // then find an article from the req.params.id,
     // and update it's "note" property with the _id of the new note.
+    console.log(req.body);
+    console.log("xxxxxxx");
     db.Note.create(req.body)
     .then(function(dbNote) {
         return db.Article.findOneAndUpdate(

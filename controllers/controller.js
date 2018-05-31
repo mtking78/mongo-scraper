@@ -30,7 +30,7 @@ router.get("/scrape", function(req, res) {
             db.Article.create(result)
             .then(function(dbArticle) {
                 // View the added result in the console:
-                console.log(dbArticle);
+                // console.log(dbArticle);
             })
             .catch(function(error) {
                 // Send the error, if it exists.
