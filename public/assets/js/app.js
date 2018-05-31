@@ -24,7 +24,7 @@ $(function() {
             // console.log("Scrape complete");
             // Reload the page to get the scraped data.
             $(".scrapeCloseBtn").on("click", function() {
-                location.reload();
+                window.location.href = '/';
             });
         });
     });
@@ -58,7 +58,7 @@ $(function() {
         .then(function() {
             // console.log("Article has been saved");
             $(".saveArticleCloseBtn").on("click", function() {
-                location.reload();
+                window.location.href = '/';
             });
         });
     });
@@ -146,8 +146,7 @@ $(function() {
         .then(function(data) {
             // Log the response
             console.log(data);
-            // Todo- use better method than reload
-            location.reload();
+            window.location.href = '/saved-articles';
         })
     });
 
@@ -166,9 +165,8 @@ $(function() {
         })
         .then(function(data) {
             // Log the response
-            console.log(data);
-            // Todo- use better method than reload
-            // location.reload();
+            // console.log(data);
+            window.location.href = '/saved-articles';
         });
         // Also, remove the values entered in the input and textarea for note entry
         $("#titleinput").val("");
@@ -196,7 +194,7 @@ $(function() {
         .then(function() {
             // console.log("Article removed");
             $(".returnArticleCloseBtn").on("click", function() {
-                location.reload();
+                window.location.href = '/saved-articles';
             });
         });
     });

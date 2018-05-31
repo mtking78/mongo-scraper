@@ -22,7 +22,7 @@
     margin-top: 20px;
     background-color: #fff;
     background-image: url("/assets/images/the-onion.svg");
-    background-size: 45%;
+    background-size: 40%;
     background-repeat: no-repeat;
     background-position: 20% 85%;
     z-index: 10;
@@ -81,6 +81,24 @@
 .header-right {
     float: right;
     display: inline;
+}
+
+.body-left {
+    display: inline;
+    margin-right: 10px;
+    width: 30%;
+}
+
+.article-img {
+    width: inherit;
+    height: inherit;
+    border-radius: 5px;
+}
+
+.body-right {
+    display: inline;
+    float: right;
+    width: 67%;
 }
 
 #save-btn,
