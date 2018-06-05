@@ -1,5 +1,5 @@
 # Mongo & Mongoose Web Scraper
-!(public/assets/images/scraperRM.gif)
+![](public/assets/images/scraperRM.gif)
 
 ### Scrape articles from [The Onion](https://www.theonion.com/c/news-in-brief), save your favorites, and make comments.
 ## [Link to Live Heroku Page](https://safe-meadow-70895.herokuapp.com/)
