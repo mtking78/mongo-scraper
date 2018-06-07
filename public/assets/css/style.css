@@ -45,6 +45,7 @@
 .row {
     position: relative;
     top: 175px;
+    margin-bottom: 175px;
 }
 
 #modal-message {
@@ -82,15 +83,8 @@
     font-weight: bold;
 }
 
-.header-left {
-    float: left;
-    width: 85%;
-    display: inline;
-}
-
 .header-right {
     float: right;
-    display: inline;
 }
 
 .body-left {
@@ -112,8 +106,11 @@
 }
 
 #save-btn,
-#return-btn {
+#return-btn,
+#notes-btn {
     border: 2px solid #fff;
+    display: block;
+    margin: 5px;
 }
 
 #notecard {

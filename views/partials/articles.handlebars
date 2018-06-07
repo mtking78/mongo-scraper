@@ -1,11 +1,11 @@
 {{#each articles}}{{#unless saved}}
 <div class="card">
     <div class="card-header bg-primary">
+        <div class="header-right">
+            <button type="button" class="btn save-btn btn-success" id="save-btn" data-id="{{_id}}">Save</button>
+        </div>
         <div class="header-left">
             <h3 class="articleTitle">{{title}}</h3>
-        </div>
-        <div class="header-right">
-            <button type="button" class="btn save-btn btn-success" data-id="{{_id}}">Save</button>
         </div>
     </div>
     <div class="card-body">
